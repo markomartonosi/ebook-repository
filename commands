@@ -2,3 +2,4 @@ sudo docker-compose build
 sudo docker-compose up -d
 sudo docker-compose exec backbone python ./manage.py migrate
 sudo docker-compose exec backbone python ./manage.py seeddatabase
+sudo docker-compose exec es bin/elasticsearch-plugin install https://filebin.net/xcdjha8kyfydne9h/serbian-analyzer-1.0-SNAPSHOT.zip?t=zoobcu4y
