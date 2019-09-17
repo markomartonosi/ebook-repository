@@ -5,13 +5,14 @@ services:
         environment:
             - MYSQL_DATABASE=ebook_repository
             - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_PASSWORD=root
-            - MYSQL_USER=root
         ports:
             - "33006:3306"
     backbone:
         build:  ./backbone
-        command: "python backbone/manage.py runserver 0.0.0.0:8000"
+        command: >
+            sh -c "python backbone/manage.py wait_for_db &&
+                   python backbone/manage.py migrate &&
+                   python backbone/manage.py runserver 0.0.0.0:8000"
         ports:
             - "8000:8000"
         volumes:
