@@ -1,0 +1,55 @@
+.book-wrapper {
+  border-right: 1px solid #f0f0f0;
+  display: inline-block;
+  margin-right: 2em;
+  padding: 1em;
+  margin-bottom: 2em;
+  max-width: 20%;
+}
+
+.book-wrapper.link {
+  cursor: pointer;
+  z-index: 200;
+}
+
+.filter-wrapper {
+  display:inline-block;
+  margin-top: 1em;
+  margin-right: 1em;
+}
+
+.filter-x {
+  color: red;
+  float: right;
+}
+
+.filter-x:hover {
+  cursor: pointer;
+}
+
+.filter-data {
+  margin-top: 1em;
+  margin-right: 1em;
+  text-decoration: underline;
+}
+
+p {
+  margin:0;
+}
+
+
+body {
+  z-index: -1;}
+
+.highlight {
+  font-style: italic;
+  color: #ff4f4f;
+}
+
+em {
+  font-weight: bold;
+}
+
+* {
+  font-family: Consolas,monaco,monospace;
+}

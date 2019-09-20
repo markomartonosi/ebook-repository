@@ -39,6 +39,28 @@ services:
         volumes:
             - .:/es
         command: > 
-            sh -c "su elasticsearch ./bin/elasticsearch-plugin install https://filebin.net/xcdjha8kyfydne9h/serbian-analyzer-1.0-SNAPSHOT.zip?t=6rucedno && su elasticsearch -c './bin/elasticsearch -Ediscovery.type=single-node'"
+            sh -c "su elasticsearch ./bin/elasticsearch-plugin install https://filebin.net/xcdjha8kyfydne9h/serbian-analyzer-1.0-SNAPSHOT.zip?t=mbzeyzl0 && su elasticsearch -c './bin/elasticsearch -Ediscovery.type=single-node'"
+    search:
+        build: ./search
+        ports:
+            - "5000:5000"
+        command:
+            sh -c "flask run --host=0.0.0.0 --port=5000"
+        depends_on:
+            - es
+    translate:
+        build: ./translate
+        ports:
+            - "5001:5001"
+        command: > 
+            sh -c "flask run --host=0.0.0.0 --port=5001"
+        depends_on:
+            - search
+    frontend:
+        build: ./frontend
+        ports:
+            - "3000:3000"
+        command: >
+            sh -c "npm start"
             
             
