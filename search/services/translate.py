@@ -1,7 +1,7 @@
 import json
 import requests
 
-TRANSLATE_URI = "http://localhost:5001"
+TRANSLATE_URI = "http://translate:5001"
 
 
 def translate(lang, query):

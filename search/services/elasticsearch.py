@@ -5,7 +5,7 @@ import cyrtranslit
 
 import requests
 
-ELASTICSEARCH_SERVER = "es://es:9200"
+ELASTICSEARCH_SERVER = "http://es:9200"
 
 
 def delete(id):

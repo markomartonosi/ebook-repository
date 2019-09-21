@@ -5,6 +5,7 @@ from django_filters import rest_framework as filters
 from rest_framework import viewsets
 from rest_framework.decorators import permission_classes, action
 from rest_framework.exceptions import PermissionDenied, ParseError
+from services import search as search_service
 
 from .models import Category, EBook, Language, User
 from .serializers import (
@@ -117,3 +118,7 @@ def ExtractMetadataView(request):
         return JsonResponse(
             {"errors": {"detail": "file not pdf format"}}, status=400
         )
+
+
+def SearchHealthcheck(request):
+    return HttpResponse(search_service.healthcheck())

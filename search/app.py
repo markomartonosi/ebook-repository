@@ -10,6 +10,11 @@ from services.elasticsearch import delete as do_delete
 app = Flask(__name__)
 
 
+@app.route("/healthcheck")
+def healthcheck():
+    return "ok"
+
+
 @app.route("/api/search", methods=["POST"])
 @cross_origin(origins=["http://localhost:3000"])
 def search():

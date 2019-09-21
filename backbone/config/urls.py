@@ -28,6 +28,7 @@ from ebook_repository.views import (
     FiltersView,
     LanguageViewSet,
     UserViewSet,
+    SearchHealthcheck
 )
 from extensions.simplejwt import EBookRepositoryObtainPairView
 
@@ -44,7 +45,8 @@ urlpatterns = [
     path("api/token", EBookRepositoryObtainPairView.as_view()),
     path("api/token/refresh", TokenRefreshView.as_view()),
     path("api/filters", FiltersView),
-    path("api/metadata", ExtractMetadataView)
+    path("api/metadata", ExtractMetadataView),
+    path("api/search-healthcheck", SearchHealthcheck)
 ]
 
 

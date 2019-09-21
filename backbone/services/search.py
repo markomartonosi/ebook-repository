@@ -1,6 +1,8 @@
 import requests
 
-FLASK_APP = "localhost://search:5000>"
+FLASK_APP = "http://search:5000"
+
+
 
 
 def create_e_ebook(id,
@@ -32,3 +34,7 @@ def create_e_ebook(id,
 
 def delete_e_book(id):
     return requests.delete(f"{FLASK_APP}/delete/{id}")
+
+
+def healthcheck():
+    return requests.get(f"{FLASK_APP}/healthcheck")
