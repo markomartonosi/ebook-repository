@@ -1,6 +1,6 @@
 import requests
 
-FLASK_APP = "http://localhost:5000"
+FLASK_APP = "localhost://search:5000>"
 
 
 def create_e_ebook(id,

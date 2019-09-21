@@ -39,7 +39,7 @@ services:
         volumes:
             - .:/es
         command: > 
-            sh -c "su elasticsearch ./bin/elasticsearch-plugin install https://filebin.net/xcdjha8kyfydne9h/serbian-analyzer-1.0-SNAPSHOT.zip?t=mbzeyzl0 && su elasticsearch -c './bin/elasticsearch -Ediscovery.type=single-node'"
+            sh -c "su elasticsearch ./bin/elasticsearch-plugin install https://filebin.net/xcdjha8kyfydne9h/serbian-analyzer-1.0-SNAPSHOT.zip?t=6uybe9uk && su elasticsearch -c './bin/elasticsearch -Ediscovery.type=single-node'"
     search:
         build: ./search
         ports:

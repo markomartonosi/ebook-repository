@@ -2,3 +2,5 @@ __pycache__/
 Dockerfile.save
 mysql/
 .idea/
+node_modules/
+media/
