@@ -40,7 +40,7 @@ services:
         volumes:
             - .:/es
         command: > 
-            sh -c "su elasticsearch ./bin/elasticsearch-plugin install https://srv-file7.gofile.io/download/vF2GXM/serbian-analyzer-1.0-SNAPSHOT.zip && su elasticsearch -c './bin/elasticsearch -Ediscovery.type=single-node'"
+            sh -c "su elasticsearch ./bin/elasticsearch-plugin install https://srv-file7.gofile.io/download/vF2GXM/serbian-analyzer-1.0-SNAPSHOT.zip && su elasticsearch -c './bin/elasticsearch -Ediscovery.type=single-node -Ehttp.cors.enabled=true -Ehttp.cors.allow-origin=http://search:5000'"
     search:
         build: ./search
         ports:
