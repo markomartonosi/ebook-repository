@@ -39,7 +39,11 @@ class UserPage extends Component {
     patchUserInfo(this.state.user.id, this.state.firstName, this.state.lastName, this.state.username, this.state.type, this.state.selectedCategories.map(item => item.id))
       .then(patchSuccessfull => {
         if (patchSuccessfull) {
-          window.location.replace("/login");
+          if(parseInt(this.state.id) === getDecodedAccessToken().user_id) {
+            removeTokens();
+            window.location.replace("/login");
+          }
+          window.location.replace("/");
         } else {
           alert("Patch unsucessful");
         }
@@ -62,11 +66,13 @@ class UserPage extends Component {
     patchUserPassword(data)
       .then(patchSuccessfull => {
         if (patchSuccessfull) {
-          console.log(this.state.id, getDecodedAccessToken().id);
-          if(this.state.id == getDecodedAccessToken().user_id) {
+          if(parseInt(this.state.id) == parseInt(getDecodedAccessToken().user_id)) {
             removeTokens();
             window.location.replace("/login");
+          } else {
+            window.location.replace("/admin");
           }
+          
         } else {
           alert("Old password is incorrect!");
         }
@@ -112,7 +118,7 @@ class UserPage extends Component {
             )}
           </select><br />
           {/* TODO: SELECT FOR USER TYPE */}
-          {isAdmin() ? <> type: </> : <></>} <UesSelect selected={this.state.user.attributes.type} change={this.handleTypeChange} options={userTypes} guards={[isAdmin,]} />
+          {isAdmin() ? <> type: </> : <></>} <UesSelect selected={this.state.type} change={this.handleTypeChange} options={userTypes} guards={[isAdmin,]} />
           <button onClick={this.handleSubmit}>Update</button>
           <h2>Change password</h2>
           <input placeholder="old password" typename="oldPassword" onChange={this.handleInputChange} value={this.state.oldPassword || ""} type="password"></input><br />

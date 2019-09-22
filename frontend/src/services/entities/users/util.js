@@ -9,7 +9,7 @@ function updatePasswordValidation(data) {
         return false;
     }
 
-    if(data["newPassword"].trim() === "" || data["newPasswordConfirm"].trim()) {
+    if(data["newPassword"].trim() === "" || data["newPasswordConfirm"].trim() === "") {
         alert("Must enter password");
         return false;
     }

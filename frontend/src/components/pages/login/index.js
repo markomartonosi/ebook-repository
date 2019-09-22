@@ -3,8 +3,8 @@ import LoginForm from '../../organisms/login';
 import { getAccessToken } from '../../../services/shared/auth';
 class LoginPage extends Component {
   constructor() {
+    super();
     if(getAccessToken()) window.location.replace("/");
-    else super(); 
   }
 
   render() {

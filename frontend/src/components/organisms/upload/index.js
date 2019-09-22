@@ -32,6 +32,10 @@ class UploadForm extends Component {
     }
 
     handleSubmit(e) {
+        if(this.state.file === undefined) {
+            alert("No file is selected!");
+            return;
+        }
         const data = {
             "file": this.state.file,
             "title": this.state.title,

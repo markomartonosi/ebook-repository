@@ -39,6 +39,10 @@ class Filter extends Component {
     }
 
     handleFilterApply(e) {
+        if(this.state.filterValue.trim() === "") {
+            alert("Filter value mustn't be empty");
+            return;
+        }
         let appliedFilters = this.state.appliedFilters || [];
         const filterType = this.state["filterType"];
         appliedFilters.push(filterType + "=" + this.state.filterValue);
