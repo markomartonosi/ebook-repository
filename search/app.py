@@ -27,6 +27,7 @@ def search():
 
 
 @app.route("/create", methods=["POST"])
+@cross_origin(origins=["http://localhost:8000"])
 def create():
     data = dict(request.form)
     create_result = do_create(
@@ -46,6 +47,7 @@ def create():
 
 
 @app.route("/delete/<int:id>", methods=["DELETE", ])
+@cross_origin(origins=["http://localhost:8000"])
 def delete(id):
     do_delete(id)
     return jsonify({"success": True})

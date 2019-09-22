@@ -5,6 +5,7 @@
   padding: 1em;
   margin-bottom: 2em;
   max-width: 20%;
+  vertical-align: top;
 }
 
 .book-wrapper.link {

@@ -25,8 +25,10 @@ function search(query, filters) {
   }
 
   return axiosWrapper.post(searchApiBaseUrl + "/search", data).then(resp => {
-    if (resp.data.hits.total.value != 0) {
-      return {"ebooks": resp.data.hits.hits, "query": query, "filters":filters}; 
+    if(resp.data.hits) {
+      if (resp.data.hits.total.value != 0) {
+        return {"ebooks": resp.data.hits.hits, "query": query, "filters":filters}; 
+      }
     }
   })
 }

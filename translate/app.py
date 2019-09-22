@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 @app.route("/translate/<string:lang>/<string:query>", methods=["GET"])
-@cross_origin(origins=["http://localhosts:5000"])
+@cross_origin(origins=["http://search:5000"])
 def translate(lang, query):
     try:
         uri_encoded_query = urllib.parse.quote(query)

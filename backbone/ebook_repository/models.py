@@ -28,6 +28,11 @@ class User(DjangoUser):
     )
     categories = models.ManyToManyField(Category, blank=True)
 
+    def save(self, *args, **kwargs):
+        if not self.password.startswith("pbkdf2_"):
+            self.set_password(self.password)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -39,8 +44,8 @@ class EBook(models.Model):
     publication_year = models.IntegerField(blank=True)
     filename = models.FileField(upload_to="uploads/", blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
