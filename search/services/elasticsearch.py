@@ -24,6 +24,8 @@ def create(
         language_id,
         language_name: str,
 ):
+    ebook_index = get_or_create_index()
+
     text = ""
     pdf = pdftotext.PDF(file)
     for i in range(0, len(pdf)):
@@ -52,7 +54,7 @@ def create(
         "language": {"id": language_id, "name": language_name},
         "filename": file.filename,
     }
-    return requests.put(f"{ELASTICSEARCH_SERVER}/ebook/_doc/{id}?pretty",
+    return requests.put(f"{ELASTICSEARCH_SERVER}/{ebook_index}/{id}?pretty",
                         json=new_book)
 
 
@@ -108,6 +110,78 @@ def search(constructed_query_json):
     return requests.post(
         f"{ELASTICSEARCH_SERVER}/ebook/_search", json=constructed_query_json
     )
+
+
+def get_or_create_index():
+    """
+    Creates ebook index if check returns 400(or doesn't return 200). If
+    creation fails, raises exception.
+    :return: formated string for elasticsearch querying, eg. ebook/_doc
+    """
+    if requests.head(f"{ELASTICSEARCH_SERVER}/ebook").status_code != 200:
+        data = {
+            "mappings": {
+                "properties": {
+                    "title": {
+                        "type": "text"
+                    },
+                    "author": {
+                        "type": "text"
+                    },
+                    "keywords": {
+                        "type": "keyword"
+                    },
+                    "publication_year": {
+                        "type": "integer"
+                    },
+                    "content": {
+                        "type": "text",
+                        "fields": {
+                            "sr": {
+                                "type": "text",
+                                "analyzer": "serbian"
+                            },
+                            "en": {
+                                "type": "text",
+                                "analyzer": "english"
+                            }
+                        }
+                    },
+                    "user": {
+                        "type": "text"
+                    },
+                    "category": {
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "language": {
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "filename": {
+                        "type": "text"
+                    }
+                }
+            }
+        }
+        if requests.put(
+                f"{ELASTICSEARCH_SERVER}/ebook?pretty",
+                json=data)\
+                .status_code != 200:
+            raise Exception("Couldn't update index mapping, try manually.")
+    return "ebook/_doc"
 
 
 def create_ebook_index():
