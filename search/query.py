@@ -70,17 +70,30 @@ def construct_filters(filters):
     for filter_name in filters:
         filter_name_values_json = []
         for filter_values in filters[filter_name]:
-            filter_name_values_json.append(
-                {
-                    "match": {
-                        filter_name: {
-                            "query": filter_values,
-                            "zero_terms_query": "none",
+            if filter_name in ("language", "category"):
+                filter_name_values_json.append(
+                    {
+                        "match": {
+                            f"{filter_name}.name": {
+                                "query": filter_values,
+                                "zero_terms_query": "none",
+                            }
                         }
                     }
-                }
-            )
+                )
+            else:
+                filter_name_values_json.append(
+                    {
+                        "match": {
+                            filter_name: {
+                                "query": filter_values,
+                                "zero_terms_query": "none",
+                            }
+                        }
+                    }
+                )
 
+        print(json_filters)
         json_filters.append({"bool": {"should": filter_name_values_json}})
 
     return json_filters
