@@ -1,6 +1,0 @@
-command: > 
-            sh -c "su elasticsearch ./bin/elasticsearch-plugin install https://filebin.net/xcdjha8kyfydne9h/serbian-analyzer-1.0-SNAPSHOT.zip?t=o7vqs3lf && su elasticsearch ./bin/elasticsearch"
-
-            
-command: > 
-            sh -c "su elasticsearch ./bin/elasticsearch-plugin install https://filebin.net/xcdjha8kyfydne9h/serbian-analyzer-1.0-SNAPSHOT.zip?t=l9kcl48e && su elasticsearch ./bin/elasticsearch"
