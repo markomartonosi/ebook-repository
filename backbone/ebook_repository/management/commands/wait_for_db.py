@@ -8,11 +8,6 @@ from django.db.utils import OperationalError as django_operational_error
 
 
 class Command(BaseCommand):
-    """
-    Executed before running database migrations to ensure database service is actually
-    up and running, in other case retries connecting after 3 seconds. Currently only
-    supports mysql.
-    """
     def handle(self, *args, **options):
         db_conn = None
         while not db_conn:
